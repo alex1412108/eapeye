@@ -5,7 +5,7 @@ s = daq.createSession('ni')
 ch_o = addAnalogOutputChannel(s,'Dev1',0:1,'Voltage')
 % ch_i = addAnalogInputChannel(s,'Dev2', 0:1, 'Voltage');
 % ch_i(1).TerminalConfig = 'SingleEnded';
- ch_i = addAnalogInputChannel(s,'Dev1',0,'Voltage')
+ ch_i = addAnalogInputChannel(s,'Dev1',0:8,'Voltage')
  ch_i(1).TerminalConfig = 'SingleEnded';
 %addAnalogInputChannel(s,'Dev2',1,'Voltage')
  
