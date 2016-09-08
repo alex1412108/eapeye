@@ -74,6 +74,7 @@ if __name__ == '__main__':
     task.WriteAnalogScalarF64(1,10.0,eapright,None)
     task.WriteAnalogScalarF64(1,10.0,eapleft,None)
     print (multipleAI.readAll())
+    
 
     task.StopTask()
     

@@ -21,7 +21,9 @@ class CallbackTask(Task):
         self.AutoRegisterDoneEvent(0)
     def EveryNCallback(self):
         read = int32()
+        #DAQmxReadAnalogF64(taskHandle, numSampsPerChan, timeout, fillMode, readArray, arraySizeInSamps, sampsPerChanRead, reserved)
         self.ReadAnalogF64(1000,10.0,DAQmx_Val_GroupByScanNumber,self.data,1000,byref(read),None)
+
         self.a.extend(self.data.tolist())
         print (self.data[0])
         return 0 # The function should return an integer
