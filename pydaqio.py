@@ -58,17 +58,24 @@ class MultiChannelAnalogInput():
 
 if __name__ == '__main__':
     task = Task()
+    #CreateAOVoltageChan(physicalChannel, nameToAssignToChannel,minVal,maxVal,units,customScaleName)
     task.CreateAOVoltageChan("/Dev1/ao1","",-10.0,10.0,DAQmx_Val_Volts,None)
+    #task.CreateAOVoltageChan("/Dev1/ao0","",-10.0,10.0,DAQmx_Val_Volts,None)
 
-    multipleAI = MultiChannelAnalogInput(["Dev1/ai4","Dev1/ai1"])
+    #load cell, displacement laser, bottompotential, bottomcurrent, voltagebox2, toppotential, topcurrent, voltagebox4
+    multipleAI = MultiChannelAnalogInput(["Dev1/ai4","Dev1/ai5","Dev1/ai6","Dev1/ai7","Dev1/ai8","Dev1/ai12","Dev1/ai13","Dev1/ai14"])
     multipleAI.configure()
 
-    value = 5
+    eapright = 7
+    eapleft = 7
     
     task.StartTask()
-
-    task.WriteAnalogScalarF64(1,10.0,value,None)
+    #task.WriteAnalogScalarF64(autoStart,timeout,value,reserved)
+    task.WriteAnalogScalarF64(1,10.0,eapright,None)
+    task.WriteAnalogScalarF64(1,10.0,eapleft,None)
     print (multipleAI.readAll())
 
     task.StopTask()
     
+
+    # last signal sent should 0 both outputs
