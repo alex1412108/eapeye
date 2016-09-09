@@ -47,7 +47,6 @@ xlabel('Time (seconds)'); ylabel('Voltage (Volts)');
 title(['Clocked Data Triggered on: ' datestr(triggerTime)])
 
 
-filename = sprintf('file_%s.csv', datestr(now, 30));
 %FL = fopen(filename,'w');
 
 csvwrite(filename,data)
