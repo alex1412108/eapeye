@@ -31,15 +31,15 @@ s.Rate = sample_rate;          % take 60 samples per second
 
 
 
-output = 1 + square(0:f*2*pi/sample_rate:20*pi)';        % start     :     frequency * (step size) / sample rate     :     desired length of time (s) * frequency * step size (per second)
+output = 1 + 3*square(0:f*2*pi/sample_rate:20*pi)';        % start     :     frequency * (step size) / sample rate     :     desired length of time (s) * frequency * step size (per second)
 
 switch_lo = 0*square(0:f*2*pi/sample_rate:20*pi)';      % matrix of 0, same length as output signal
 switch_hi = 1+0*square(0:f*2*pi/sample_rate:20*pi)';    % matrix of 1, same length as  output signal
 
 %queueOutputData(s,output);
 %queueOutputData(s,  [switch_lo,switch_lo; switch_hi, output; switch_lo, switch_lo]);     % Use the queueOutputData function to generate multiple scans. Data should be a M-by-N matrix where M is the number of scans you want and N is the number of channels in the session
-%queueOutputData(s,  [switch_hi, output ; 0, 0]);
-queueOutputData(s,  [1, 1;2, 2;6, 6;7, 7;]);
+queueOutputData(s,  [switch_lo, output ; 0, 0]);
+%queueOutputData(s,  [1, 1;2, 2;6, 6;7, 7;]);
 %queueOutputData(s,  [0, 0]);
 plot(output);
 
