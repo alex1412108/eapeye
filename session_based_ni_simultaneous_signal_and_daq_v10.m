@@ -5,7 +5,7 @@ s = daq.createSession('ni')
 ch_o = addAnalogOutputChannel(s,'Dev1',0:1,'Voltage')
 % ch_i = addAnalogInputChannel(s,'Dev2', 0:1, 'Voltage');
 % ch_i(1).TerminalConfig = 'SingleEnded';
- ch_i = addAnalogInputChannel(s,'Dev1',0:8,'Voltage')
+ ch_i = addAnalogInputChannel(s,'Dev1',0:7,'Voltage')
  ch_i(1).TerminalConfig = 'SingleEnded';
 %addAnalogInputChannel(s,'Dev2',1,'Voltage')
  
@@ -38,8 +38,8 @@ switch_hi = 1+0*square(0:f*2*pi/sample_rate:20*pi)';    % matrix of 1, same leng
 
 %queueOutputData(s,output);
 %queueOutputData(s,  [switch_lo,switch_lo; switch_hi, output; switch_lo, switch_lo]);     % Use the queueOutputData function to generate multiple scans. Data should be a M-by-N matrix where M is the number of scans you want and N is the number of channels in the session
-queueOutputData(s,  [switch_hi, output ; 0, 0]);
-%queueOutputData(s,  [4, 3; 0, 0]);
+%queueOutputData(s,  [switch_hi, output ; 0, 0]);
+queueOutputData(s,  [1, 1;2, 2;6, 6;7, 7;]);
 %queueOutputData(s,  [0, 0]);
 plot(output);
 
