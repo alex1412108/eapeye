@@ -38,7 +38,9 @@ switch_hi = 1+0*square(0:f*2*pi/sample_rate:20*pi)';    % matrix of 1, same leng
 
 %queueOutputData(s,output);
 %queueOutputData(s,  [switch_lo,switch_lo; switch_hi, output; switch_lo, switch_lo]);     % Use the queueOutputData function to generate multiple scans. Data should be a M-by-N matrix where M is the number of scans you want and N is the number of channels in the session
-queueOutputData(s,  [switch_hi, output]); 
+queueOutputData(s,  [switch_hi, output ; 0, 0]);
+%queueOutputData(s,  [4, 3; 0, 0]);
+%queueOutputData(s,  [0, 0]);
 plot(output);
 
 [data, timestamps, triggerTime] = s.startForeground;
@@ -46,13 +48,15 @@ plot(timestamps, data);
 xlabel('Time (seconds)'); ylabel('Voltage (Volts)');
 title(['Clocked Data Triggered on: ' datestr(triggerTime)])
 
-
+filename1 = sprintf('results/data_%s.csv', datestr(now, 30));
+filename2 = sprintf('results/timestamps_%s.csv', datestr(now, 30));
 %FL = fopen(filename,'w');
 
-csvwrite(filename,data)
+csvwrite(filename1,data)
+csvwrite(filename2,timestamps)
 
 
-
+%queueOutputData(s,  [0, 0]);
 
 %% ANOTHER WAY TO DO IT: 
 % output_data = 10*sin(linspace(0,2*pi,1000)');
