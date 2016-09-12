@@ -1,0 +1,6 @@
+calibration test was performed with 1 V sent to the front voltage box and 0 V sent to the back voltage box.
+test was started with both boxes previously set to 0 V. At the conclusion of the test both boxes were set to 0 V.
+the format for data is (bottompotential, bottomcurrent, voltageboxfront, toppotential, topcurrent, voltageboxback, load cell, displacement laser) 
+
+Load cell control box reads 1.949 to 1.950
+displacement laser control box reads -0.0016 to -0.0034

@@ -31,7 +31,7 @@ s.Rate = sample_rate;          % take 60 samples per second
 
 
 
-output = 1 + 3*square(0:f*2*pi/sample_rate:20*pi)';        % start     :     frequency * (step size) / sample rate     :     desired length of time (s) * frequency * step size (per second)
+output = 1 + 0*square(0:f*2*pi/sample_rate:20*pi)';        % start     :     frequency * (step size) / sample rate     :     desired length of time (s) * frequency * step size (per second)
 
 switch_lo = 0*square(0:f*2*pi/sample_rate:20*pi)';      % matrix of 0, same length as output signal
 switch_hi = 1+0*square(0:f*2*pi/sample_rate:20*pi)';    % matrix of 1, same length as  output signal
@@ -48,12 +48,17 @@ plot(timestamps, data);
 xlabel('Time (seconds)'); ylabel('Voltage (Volts)');
 title(['Clocked Data Triggered on: ' datestr(triggerTime)])
 
-filename1 = sprintf('results/data_%s.csv', datestr(now, 30));
-filename2 = sprintf('results/timestamps_%s.csv', datestr(now, 30));
+testname = 'testing'
+filename1 = sprintf('%s_results/data_%s.csv', testname, datestr(now, 30));
+filename2 = sprintf('%s_results/timestamps_%s.csv', testname, datestr(now, 30));
+filename3 = sprintf('%s_results/drivingvoltage_%s.csv', testname, datestr(now, 30));
+
 %FL = fopen(filename,'w');
 
+%the format for data is (bottompotential, bottomcurrent, voltageboxfront, toppotential, topcurrent, voltageboxback, load cell, displacement laser) 
 csvwrite(filename1,data)
 csvwrite(filename2,timestamps)
+csvwrite(filename3,output)
 
 
 %queueOutputData(s,  [0, 0]);
