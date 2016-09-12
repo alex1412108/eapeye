@@ -29,18 +29,35 @@ s.Rate = sample_rate;          % take 60 samples per second
 
 %duration = 20;                 % for 20 secs
 
+settleoutput = linspace(0,0,1000)';
+pauseoutput = linspace(0,0,100)';
 
+output = linspace(0,6,500)';
+outputlow = linspace(0,0,500)';
 
-output = 1 + 0*square(0:f*2*pi/sample_rate:20*pi)';        % start     :     frequency * (step size) / sample rate     :     desired length of time (s) * frequency * step size (per second)
+holdhigh = linspace(5,5,500)';
+holdlow = linspace(0,0,500)';
+%output = 1 + 0*square(0:f*2*pi/sample_rate:20*pi)';        % start     :     frequency * (step size) / sample rate     :     desired length of time (s) * frequency * step size (per second)
 
 switch_lo = 0*square(0:f*2*pi/sample_rate:20*pi)';      % matrix of 0, same length as output signal
 switch_hi = 1+0*square(0:f*2*pi/sample_rate:20*pi)';    % matrix of 1, same length as  output signal
 
 %queueOutputData(s,output);
 %queueOutputData(s,  [switch_lo,switch_lo; switch_hi, output; switch_lo, switch_lo]);     % Use the queueOutputData function to generate multiple scans. Data should be a M-by-N matrix where M is the number of scans you want and N is the number of channels in the session
-queueOutputData(s,  [switch_lo, output ; 0, 0]);
-%queueOutputData(s,  [1, 1;2, 2;6, 6;7, 7;]);
-%queueOutputData(s,  [0, 0]);
+%for calibration
+%queueOutputData(s,  [switch_lo, output ; 0, 0]);
+%queueOutputData(s,  [output, switch_lo ; 0, 0]);
+
+%for sensors to settle
+queueOutputData(s,  [settleoutput, settleoutput]);
+
+%for testing
+queueOutputData(s,  [outputlow, output ;holdlow, holdhigh]);
+queueOutputData(s,  [pauseoutput, pauseoutput]);
+queueOutputData(s,  [output, outputlow ;holdhigh, holdlow]);
+
+%queueOutputData(s,  [0, 1;0, 2;0, 6;0, 8]);
+queueOutputData(s,  [0, 0]);
 plot(output);
 
 [data, timestamps, triggerTime] = s.startForeground;
@@ -48,10 +65,10 @@ plot(timestamps, data);
 xlabel('Time (seconds)'); ylabel('Voltage (Volts)');
 title(['Clocked Data Triggered on: ' datestr(triggerTime)])
 
-testname = 'testing'
-filename1 = sprintf('%s_results/data_%s.csv', testname, datestr(now, 30));
-filename2 = sprintf('%s_results/timestamps_%s.csv', testname, datestr(now, 30));
-filename3 = sprintf('%s_results/drivingvoltage_%s.csv', testname, datestr(now, 30));
+testname = 'split1_loadcell'
+filename1 = sprintf('results/%s_data_%s.csv', testname, datestr(now, 30));
+filename2 = sprintf('results/%s_timestamps_%s.csv', testname, datestr(now, 30));
+filename3 = sprintf('results/%s_drivingvoltage_%s.csv', testname, datestr(now, 30));
 
 %FL = fopen(filename,'w');
 
