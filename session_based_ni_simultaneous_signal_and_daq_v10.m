@@ -32,10 +32,10 @@ s.Rate = sample_rate;          % take 60 samples per second
 settleoutput = linspace(0,0,1000)';
 pauseoutput = linspace(0,0,100)';
 
-output = linspace(0,7,500)';
+output = linspace(0,6.5,500)';
 outputlow = linspace(0,0,500)';
 
-holdhigh = linspace(6.5,6.5,500)';
+holdhigh = linspace(6,6,500)';
 holdlow = linspace(0,0,500)';
 %output = 1 + 0*square(0:f*2*pi/sample_rate:20*pi)';        % start     :     frequency * (step size) / sample rate     :     desired length of time (s) * frequency * step size (per second)
 
@@ -56,6 +56,23 @@ queueOutputData(s,  [outputlow, output ;holdlow, holdhigh]);
 %queueOutputData(s,  [pauseoutput, pauseoutput]);
 %queueOutputData(s,  [output, outputlow ;holdhigh, holdlow]);
 
+%multicycle test
+%queueOutputData(s,  [outputlow, output ;holdlow, holdhigh]);
+%queueOutputData(s,  [pauseoutput, pauseoutput]);
+%queueOutputData(s,  [output, outputlow ;holdhigh, holdlow]);
+%queueOutputData(s,  [pauseoutput, pauseoutput]);
+%queueOutputData(s,  [outputlow, output ;holdlow, holdhigh]);
+%queueOutputData(s,  [pauseoutput, pauseoutput]);
+%queueOutputData(s,  [output, outputlow ;holdhigh, holdlow]);
+%queueOutputData(s,  [pauseoutput, pauseoutput]);
+%queueOutputData(s,  [outputlow, output ;holdlow, holdhigh]);
+%queueOutputData(s,  [pauseoutput, pauseoutput]);
+%queueOutputData(s,  [output, outputlow ;holdhigh, holdlow]);
+%queueOutputData(s,  [pauseoutput, pauseoutput]);
+%queueOutputData(s,  [outputlow, output ;holdlow, holdhigh]);
+%queueOutputData(s,  [pauseoutput, pauseoutput]);
+%queueOutputData(s,  [output, outputlow ;holdhigh, holdlow]);
+
 %queueOutputData(s,  [0, 1;0, 2;0, 6;0, 8]);
 
 %for sensors to settle
@@ -71,7 +88,7 @@ xlabel('Time (seconds)'); ylabel('Voltage (Volts)');
 title(['Clocked Data Triggered on: ' datestr(triggerTime)])
 
 %triangle split displacement loadcell
-testname = 'triangle1_loadcell'
+testname = 'threelayer_maxrange_loadcell'
 filename1 = sprintf('results/%s_data_%s.csv', testname, datestr(now, 30));
 filename2 = sprintf('results/%s_timestamps_%s.csv', testname, datestr(now, 30));
 filename3 = sprintf('results/%s_drivingvoltage_%s.csv', testname, datestr(now, 30));
