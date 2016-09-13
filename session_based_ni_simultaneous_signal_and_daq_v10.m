@@ -52,7 +52,7 @@ switch_hi = 1+0*square(0:f*2*pi/sample_rate:20*pi)';    % matrix of 1, same leng
 queueOutputData(s,  [settleoutput, settleoutput]);
 
 %for testing
-queueOutputData(s,  [outputlow, output ;holdlow, holdhigh]);
+queueOutputData(s,  [holdlow, holdhigh ;holdhigh, holdlow; holdlow, holdhigh ;holdhigh, holdlow ; holdlow, holdhigh ;holdhigh, holdlow ; holdlow, holdhigh ;holdhigh, holdlow]);
 %queueOutputData(s,  [pauseoutput, pauseoutput]);
 %queueOutputData(s,  [output, outputlow ;holdhigh, holdlow]);
 
